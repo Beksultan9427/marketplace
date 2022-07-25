@@ -1,0 +1,13 @@
+{
+  "watch": [
+    {
+      "name": "Cassio classical",
+      "brand": "Casio Ltd",
+      "price": 1000,
+      "year": "1994-09-27",
+      "photo": "url",
+      "country": "Japan",
+      "id": 1
+    }
+  ]
+}

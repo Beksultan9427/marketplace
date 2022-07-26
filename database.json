@@ -1,13 +1,22 @@
 {
   "watch": [
     {
-      "name": "Cassio classical",
+      "name": "Cassio classical 777",
       "brand": "Casio Ltd",
       "price": 1000,
       "year": "1994-09-27",
       "photo": "url",
       "country": "Japan",
       "id": 1
+    },
+    {
+      "name": "Apple Watch 7",
+      "brand": "Apple",
+      "price": 450,
+      "year": "2021-09-21",
+      "photo": "url",
+      "country": "USA",
+      "id": 2
     }
   ]
 }

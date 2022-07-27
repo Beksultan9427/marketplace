@@ -1,1 +1,1 @@
-export const whatchesApi = "http://localhost:8000/watch";
+export const watchesApi = "http://localhost:8000/watch";

@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import { whatchesApi } from "../helpers/Const";
+import { watchesApi } from "../helpers/Const";
 export const AdminContext = createContext();
 
 const reducer = (state, action) => {
@@ -25,7 +25,7 @@ function AdminProvider({ children }) {
   });
 
   const sendNewWatch = (newWatch) => {
-    fetch(whatchesApi, {
+    fetch(watchesApi, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newWatch),
@@ -33,7 +33,7 @@ function AdminProvider({ children }) {
   };
 
   const getWatches = () => {
-    fetch(whatchesApi)
+    fetch(watchesApi)
       .then((res) => res.json())
       .then((data) => {
         let action = {
@@ -46,7 +46,7 @@ function AdminProvider({ children }) {
 
   // ! delete
   const deleteWatch = (id) => {
-    fetch(`${whatchesApi}/${id}`, {
+    fetch(`${watchesApi}/${id}`, {
       method: "DELETE",
     }).then(() => getWatches());
   };
@@ -54,7 +54,7 @@ function AdminProvider({ children }) {
   // ! UPDATE PART-1
 
   const getWatchToEdit = (id) => {
-    fetch(`${whatchesApi}/${id}`)
+    fetch(`${watchesApi}/${id}`)
       .then((res) => res.json())
       .then((data) => {
         let action = {
@@ -68,7 +68,7 @@ function AdminProvider({ children }) {
   // ! UPDATE PART-2
 
   const saveEditedWatch = (editedWatch) => {
-    fetch(`${whatchesApi}/${editedWatch.id}`, {
+    fetch(`${watchesApi}/${editedWatch.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

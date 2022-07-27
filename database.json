@@ -1,11 +1,11 @@
 {
   "watch": [
     {
-      "name": "Cassio classical 777",
+      "name": "Casio Vintage B650WB-1B",
       "brand": "Casio Ltd",
-      "price": 1000,
-      "year": "1994-09-27",
-      "photo": "url",
+      "price": 138,
+      "year": "2017-09-27",
+      "photo": "https://www.alltime.ru/obj/catalog/watch/casio/img/big/B650WB-1B.jpg",
       "country": "Japan",
       "id": 1
     },
@@ -14,9 +14,18 @@
       "brand": "Apple",
       "price": 450,
       "year": "2021-09-21",
-      "photo": "url",
+      "photo": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/45-nc-alum-midnight-sport-gray-s7?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1631855766000",
       "country": "USA",
       "id": 2
+    },
+    {
+      "name": "OMAX CE0229IR96",
+      "brand": "OMAX Ltd",
+      "price": 27,
+      "year": "2010-09-27",
+      "photo": "https://images.satu.kz/67398701_w640_h640_muzhskie-chasy-omax.jpg",
+      "country": "Switzerland",
+      "id": 3
     }
   ]
 }

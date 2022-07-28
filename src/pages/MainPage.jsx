@@ -8,16 +8,25 @@ import {
   Button,
   Typography,
   Slider,
+  Pagination,
 } from "@mui/material";
 import { ClientContext } from "../contexts/ClientProvider";
 
 function MainPage() {
-  const { getWatches, watches, filterByPrice, setFilterByPrice } =
-    useContext(ClientContext);
+  const {
+    getWatches,
+    watches,
+    filterByPrice,
+    setFilterByPrice,
+    pagesCount,
+    setCurrentPage,
+    currentPage,
+    addWatchToBasket,
+  } = useContext(ClientContext);
 
   useEffect(() => {
     getWatches();
-  }, [filterByPrice]);
+  }, [filterByPrice, currentPage]);
 
   return (
     <div className="main-page">
@@ -64,9 +73,22 @@ function MainPage() {
                     <span>{item.price} $</span>
                   </li>
                 </ul>
+                <Button
+                  onClick={() => addWatchToBasket(item)}
+                  variant="outlined"
+                >
+                  Добавить в корзину
+                </Button>
               </CardContent>
             </Card>
           ))}
+        </div>
+        <div className="pagination-block">
+          <Pagination
+            onChange={(_, newValue) => setCurrentPage(newValue)}
+            count={pagesCount}
+            shape="rounded"
+          />
         </div>
       </Container>
     </div>

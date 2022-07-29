@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useReducer, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 import { watchesApi } from "../helpers/Const";
 
 export const ClientContext = createContext();
@@ -10,16 +16,34 @@ const reducer = (state, action) => {
       watches: action.payload,
     };
   }
+  if (action.type === "GET_WATCHES_FROM_BASKET") {
+    return {
+      ...state,
+      basketWatches: action.payload,
+    };
+  }
+  if (action.payload === "GET_BASKET_COUNT") {
+    return {
+      ...state,
+      basketCount: action.payload,
+    };
+  }
   return state;
 };
 
 function ClientProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, {
     watches: [],
+    basketWatches: {
+      products: [],
+      totalPrice: 0,
+    },
+    basketCount: 0,
   });
 
   const [searchWord, setSearchWord] = useState("");
   const [filterByPrice, setFilterByPrice] = useState([0, 5000]);
+  const [minMax, setMinMax] = useState([0, 5000]);
 
   const limit = 2;
   const [pagesCount, setPagesCount] = useState(1);
@@ -60,18 +84,78 @@ function ClientProvider({ children }) {
         products: [],
       };
     }
-
     let watchToBasket = {
       ...watch,
       count: 1,
       subPrice: watch.price,
     };
-    basket.products.push(watchToBasket);
+
+    let check = basket.products.find((item) => {
+      return item.id === watchToBasket.id;
+    });
+    if (check) {
+      basket.products = basket.products.map((item) => {
+        if (item.id === watchToBasket.id) {
+          item.count++;
+          item.subPrice = item.count * item.price;
+          return item;
+        }
+        return item;
+      });
+    } else {
+      basket.products.push(watchToBasket);
+    }
+
     basket.totalPrice = basket.products.reduce((prev, item) => {
       return prev + item.subPrice;
     }, 0);
-    console.log(basket);
+
+    localStorage.setItem("basket", JSON.stringify(basket));
+    getBasketCount();
   };
+
+  const getWatchesFromBasket = () => {
+    let basket = JSON.parse(localStorage.getItem("basket"));
+    let action = {
+      type: "GET_WATCHES_FROM_BASKET",
+      payload: basket,
+    };
+    dispatch(action);
+  };
+
+  // ! fix price
+  const getPrices = () => {
+    fetch(watchesApi)
+      .then((res) => res.json())
+      .then((data) => {
+        data.sort((a, b) => a.price - b.price);
+        let max = data[data.length - 1].price;
+        let min = data[0].price;
+        setFilterByPrice([min, max]);
+        setMinMax([min, max]);
+      });
+  };
+
+  // ! fix отображения кол-во товара в navbar
+  const getBasketCount = () => {
+    let basket = JSON.parse(localStorage.getItem("basket"));
+    if (!basket) {
+      basket = {
+        products: [],
+      };
+    }
+    let action = {
+      type: "GET_BASKET_COUNT",
+      payload: basket.products.kength,
+    };
+    dispatch(action);
+  };
+  // !
+
+  useEffect(() => {
+    getPrices();
+    getBasketCount();
+  }, []);
 
   const data = {
     watches: state.watches,
@@ -79,11 +163,15 @@ function ClientProvider({ children }) {
     filterByPrice,
     pagesCount,
     currentPage,
+    basketWatches: state.basketWatches,
+    minMax,
+    basketCount: state.basketCount,
     getWatches,
     setSearchWord,
     setFilterByPrice,
     setCurrentPage,
     addWatchToBasket,
+    getWatchesFromBasket,
   };
   return (
     <ClientContext.Provider value={data}>{children}</ClientContext.Provider>

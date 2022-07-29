@@ -22,6 +22,7 @@ function MainPage() {
     setCurrentPage,
     currentPage,
     addWatchToBasket,
+    minMax,
   } = useContext(ClientContext);
 
   useEffect(() => {
@@ -35,8 +36,8 @@ function MainPage() {
         <div className="filter-block">
           <h4>Фильтрация по цене:</h4>
           <Slider
-            min={0}
-            max={5000}
+            min={minMax[0]}
+            max={minMax[1]}
             valueLabelDisplay="auto"
             value={filterByPrice}
             onChange={(_, newValue) => setFilterByPrice(newValue)}

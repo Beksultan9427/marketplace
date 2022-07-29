@@ -1,11 +1,11 @@
 {
   "watch": [
     {
-      "name": "Casio Vintage B650WB-1B",
+      "name": "Casio B650WB-1B",
       "brand": "Casio Ltd",
       "price": 138,
       "year": "2017-09-27",
-      "photo": "https://www.alltime.ru/obj/catalog/watch/casio/img/big/B650WB-1B.jpg",
+      "photo": "https://www.casio.com/content/dam/casio/product-info/locales/my/en/timepiece/product/watch/B/B6/b65/b650wb-1b/assets/B650WB-1B.jpg",
       "country": "Japan",
       "id": 1
     },
@@ -14,7 +14,7 @@
       "brand": "Apple",
       "price": 450,
       "year": "2021-09-21",
-      "photo": "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/45-nc-alum-midnight-sport-gray-s7?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1631855766000",
+      "photo": "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/45-nc-alum-midnight-sport-gray-s7?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1631855766000",
       "country": "USA",
       "id": 2
     },
